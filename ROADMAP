@@ -1,0 +1,31 @@
+Phase 1: Proposal & Design
+Define problem statement, motivation, objectives, and scope
+Identify target users and expected outcomes
+Design system architecture (interface → application logic → analysis → data structures → file I/O)
+Select and justify core data structures: linked list (timeline), hash table (ID/IP lookup), stack (undo history)
+Design class structure: Event, EventList, HashTable, ActionStack, RiskAnalyzer, ReportGenerator, Incident, Investigator
+Prepare sample log files (normal + attack-pattern scenarios)
+Deliverable: Project proposal document + architecture diagram
+
+
+
+Phase 2: Development
+Implement Event class and file-parsing logic (LogReader)
+Build custom linked list for chronological event storage
+Build custom hash table with chaining for Event ID / IP lookup
+Implement stack-based undo for investigator actions
+Develop RiskAnalyzer for suspicious sequence detection and risk scoring
+Build menu-driven console interface (main.cpp)
+Set up GitHub repository, version control, and team collaboration workflow
+Deliverable: Working prototype with core features functional
+
+
+
+Phase 3: Final Implementation
+Integrate all modules into a complete end-to-end system
+Implement ReportGenerator for structured investigation reports
+Test against multiple sample logs (edge cases: malformed lines, unknown IPs, no suspicious activity)
+Refine risk-scoring logic and fix bugs identified during testing
+Finalize documentation: README, code comments, user guide
+Prepare final report and research paper
+Deliverable: Complete, tested CyberTrace application + final documentation
