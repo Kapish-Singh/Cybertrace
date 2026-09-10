@@ -1,0 +1,13 @@
+===== CyberTrace Investigation Report =====
+
+-> Timeline: 
+  [3001] 2026-09-02T02:14:05 203.0.113.50 FailedLogin
+  [3002] 2026-09-02T02:14:22 203.0.113.50 FailedLogin
+  ... (every event of the IP)
+
+-> Flagged Suspicious Events 
+  [3001] 2026-09-02T02:14:05 203.0.113.50 FailedLogin
+  ... (only events of IP that completed the full attack pattern)
+
+<<<< Risk Score: 90 >>>>
+============================================
