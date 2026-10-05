@@ -68,4 +68,4 @@ CyberTrace/
 
 ## Status
 
-🚧 In development — core implementation in progress.
+ In development — core implementation in progress.
