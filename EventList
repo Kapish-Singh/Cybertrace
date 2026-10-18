@@ -1,0 +1,48 @@
+#include "EventList.h"
+
+EventList::EventList() : head(nullptr), tail(nullptr), count(0) {}
+
+EventList::~EventList() {
+    EventNode* current = head;
+    while (current) {
+        EventNode* next = current->next;
+        delete current;
+        current = next;
+    }
+}
+
+void EventList::insertEvent(const Event& e) {
+    EventNode* node = new EventNode(e);
+    if (!head) {
+        head = tail = node;
+    } else {
+        tail->next = node;
+        tail = node;
+    }
+    count++;
+}
+
+std::vector<Event> EventList::traverse() const {
+    std::vector<Event> result;
+    EventNode* current = head;
+    while (current) {
+        result.push_back(current->data);
+        current = current->next;
+    }
+    return result;
+}
+
+Event* EventList::findByID(int id) const {
+    EventNode* current = head;
+    while (current) {
+        if (current->data.getEventID() == id) {
+            return &current->data;
+        }
+        current = current->next;
+    }
+    return nullptr;
+}
+
+int EventList::size() const {
+    return count;
+}
