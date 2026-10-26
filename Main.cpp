@@ -2,6 +2,7 @@
 // Build: g++ -std=c++11 -Wall -pthread -o cybertrace main.cpp
 // On first run the three sample logs are written next to the program.
 
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
