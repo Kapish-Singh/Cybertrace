@@ -68,4 +68,4 @@ CyberTrace/
 
 ## Status
 
- In development approx; 50%done
+ In development approx; 70%done
