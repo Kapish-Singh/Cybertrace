@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <vector>
-
 struct Action {
     std::string type;         // e.g. "FLAG_EVENT", "DELETE_EVENT"
     std::string description;
