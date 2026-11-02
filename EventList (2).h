@@ -1,7 +1,6 @@
 #pragma once
 #include "Event.h"
 #include <vector>
-
 struct EventNode {
     Event data;
     EventNode* next;
