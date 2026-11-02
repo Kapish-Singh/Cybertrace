@@ -2,7 +2,6 @@
 #include <sstream>
 
 Event::Event() : eventID(0) {}
-
 Event::Event(int id, const std::string& time, const std::string& ip, const std::string& type)
     : eventID(id), timestamp(time), ipAddress(ip), eventType(type) {}
 
