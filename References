@@ -1,0 +1,24 @@
+
+
+1. A. Nelson, S. Rekhi, M. Souppaya, and K. Scarfone, "Incident response recommendations and considerations for cybersecurity risk management: A CSF 2.0 community profile," NIST Spec. Publ. 800-61 Rev. 3, Apr. 2025, doi: 10.6028/NIST.SP.800-61r3.
+2. National Institute of Standards and Technology, "The NIST Cybersecurity Framework (CSF) 2.0," NIST Cybersecurity White Paper 29, Feb. 2024, doi: 10.6028/NIST.CSWP.29.
+3. ASD's ACSC, CISA, FBI, NSA, et al., "Best practices for event logging and threat detection," Aug. 2024. https://www.cisa.gov/resources-tools/resources/best-practices-event-logging-and-threat-detection
+4. G. González-Granadillo, S. González-Zarzosa, and R. Diaz, "Security information and event management (SIEM): Analysis, trends, and usage in critical infrastructures," Sensors, vol. 21, no. 14, Art. no. 4759, Jul. 2021, doi: 10.3390/s21144759.
+5. S. He, P. He, Z. Chen, T. Yang, Y. Su, and M. R. Lyu, "A survey on automated log analysis for reliability engineering," ACM Comput. Surv., vol. 54, no. 6, Art. no. 130, Jul. 2021.
+6. M. Landauer, S. Onder, F. Skopik, and M. Wurzenberger, "Deep learning for anomaly detection in log data: A survey," Mach. Learn. Appl., vol. 12, Art. no. 100470, Jun. 2023.
+7. V.-H. Le and H. Zhang, "Log-based anomaly detection without log parsing," in Proc. 36th IEEE/ACM Int. Conf. Autom. Softw. Eng. (ASE), 2021, pp. 492-504.
+8. V.-H. Le and H. Zhang, "Log-based anomaly detection with deep learning: How far are we?" in Proc. 44th Int. Conf. Softw. Eng. (ICSE), May 2022, pp. 1356-1367.
+9. S. He, J. Zhu, P. He, and M. R. Lyu, "Loghub: A large collection of system log datasets towards automated log analytics," arXiv:2008.06448, 2020.
+10. Verizon, "2024 Data Breach Investigations Report," 2024. https://www.verizon.com/business/resources/reports/dbir/
+11. IBM Security and Ponemon Institute, "Cost of a data breach report 2024," Jul. 2024.
+12. T. H. Cormen, C. E. Leiserson, R. L. Rivest, and C. Stein, Introduction to Algorithms, 4th ed. MIT Press, 2022.
+13. B. Stroustrup, A Tour of C++, 3rd ed. Addison-Wesley, 2022.
+14. MITRE Corporation, "MITRE ATT&CK." https://attack.mitre.org
+15. MITRE Corporation, "2024 CWE top 25 most dangerous software weaknesses," Nov. 2024. https://cwe.mitre.org/top25/archive/2024/2024_cwe_top25.html
+16. Joint Task Force, "Security and privacy controls for information systems and organizations," NIST Spec. Publ. 800-53 Rev. 5, Sep. 2020, doi: 10.6028/NIST.SP.800-53r5.
+17. Center for Internet Security, "CIS Critical Security Controls, Version 8," May 2021. https://www.cisecurity.org/controls
+18. Z. Jiang et al., "A large-scale evaluation for log parsing techniques: How far are we?" in Proc. 33rd ACM SIGSOFT Int. Symp. Softw. Testing Anal. (ISSTA), Sep. 2024.
+19. M. Farach-Colton, A. Krapivin, and W. Kuszmaul, "Optimal bounds for open addressing without reordering," in Proc. 65th IEEE Annu. Symp. Found. Comput. Sci. (FOCS), Oct. 2024.
+20. European Union Agency for Cybersecurity (ENISA), "ENISA threat landscape 2024," Sep. 2024. https://www.enisa.europa.eu/publications/enisa-threat-landscape-2024
+
+Items 1 and 3 were checked against the official pages. Check volume and page numbers of the others on the publisher's page before citing them.
