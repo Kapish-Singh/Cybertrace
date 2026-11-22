@@ -1,0 +1,47 @@
+#include "LiveLogReader.h"
+
+LiveLogReader::LiveLogReader(const std::string& path, bool startAtEnd)
+    : filepath(path), lastPosition(0) {
+    logFile.open(filepath.c_str(), std::ios::in | std::ios::binary);   // binary: offsets are plain bytes
+    if (logFile.is_open() && startAtEnd) {
+        logFile.seekg(0, std::ios::end);
+        lastPosition = logFile.tellg();
+        logFile.clear();
+    }
+}
+
+LiveLogReader::~LiveLogReader() {
+    if (logFile.is_open()) logFile.close();
+}
+
+bool LiveLogReader::isOpen() const { return logFile.is_open(); }
+
+bool LiveLogReader::pollForNewEvents(std::vector<std::string>& newLines) {
+    if (!logFile.is_open()) return false;
+
+    logFile.clear();                                   // forget the end-of-file state from the last poll
+    logFile.seekg(0, std::ios::end);
+    std::streamoff end = logFile.tellg();
+    if (end < lastPosition) lastPosition = 0;          // file was truncated or rotated: start again
+    if (end == lastPosition) return false;
+
+    logFile.seekg(lastPosition);
+    std::string chunk(static_cast<std::size_t>(end - lastPosition), '\0');
+    logFile.read(&chunk[0], static_cast<std::streamsize>(chunk.size()));
+    chunk.resize(static_cast<std::size_t>(logFile.gcount()));
+
+    std::size_t lastNewline = chunk.rfind('\n');
+    if (lastNewline == std::string::npos) return false;          // only part of a line so far
+    lastPosition += static_cast<std::streamoff>(lastNewline + 1);
+
+    std::size_t start = 0;
+    bool found = false;
+    while (start <= lastNewline) {
+        std::size_t nl = chunk.find('\n', start);
+        std::string line = chunk.substr(start, nl - start);
+        if (!line.empty() && line[line.size() - 1] == '\r') line.erase(line.size() - 1);
+        if (!line.empty()) { newLines.push_back(line); found = true; }
+        start = nl + 1;
+    }
+    return found;
+}
