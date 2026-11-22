@@ -1,0 +1,72 @@
+
+
+How to get CyberTrace running from a fresh computer.
+
+## 1. Install the tools
+
+**Windows**
+1. Install MSYS2 from msys2.org. Open the "MSYS2 UCRT64" terminal and run `pacman -S mingw-w64-ucrt-x86_64-gcc make`.
+2. Add `C:\msys64\ucrt64\bin` to your PATH (search "Environment Variables", edit `Path`, add the folder).
+3. Open a new terminal and check: `g++ --version`.
+
+**macOS:** run `xcode-select --install`, then check `g++ --version`.
+
+**Linux (Ubuntu/Debian):** run `sudo apt install build-essential`.
+
+**Editor (optional):** install VS Code from code.visualstudio.com and add the "C/C++" extension by Microsoft.
+
+## 2. Get the code
+
+    git clone https://github.com/Kapish-Singh/Cybertrace.git
+
+or use **Code > Download ZIP** on the repository page and extract it. Open the `Cybertrace` folder in VS Code (File > Open Folder), then open a terminal in it (Terminal > New Terminal).
+
+## 3. Build
+
+    make
+
+or, without make:
+
+    g++ -std=c++11 -Wall -Iinclude -pthread -o cybertrace src/*.cpp
+
+No output from the compiler means success. On Windows with MSYS2, `make` may be called `mingw32-make`.
+
+If you would rather work with one file, `extras/single_file/main.cpp` contains the whole program: `g++ -std=c++11 -Wall -pthread -o cybertrace extras/single_file/main.cpp`.
+
+## 4. Run
+
+    ./cybertrace            (macOS / Linux)
+    .\cybertrace.exe        (Windows PowerShell; in Command Prompt use cybertrace.exe)
+
+Enter a name, then use the menu (see the [user guide](User_Guide.md) for every option):
+
+    1. Load logs                  8. Undo last action
+    2. View timeline              9. Live monitor a log file
+    3. Search by Event ID        10. Delete an event
+    4. Search by IP address      11. Show alerts
+    5. Analyze risk for an IP    12. Save investigation
+    6. Generate report           13. Load investigation
+    7. Flag an event             14. Index statistics
+    0. Exit
+
+## 5. Try it
+
+1. Choose 1 and type `logs/sample_attack.txt` (21 events).
+2. Choose 5 and type `203.0.113.50`: risk score 28 and an attack alert.
+3. Choose 6: the report is printed and saved as `investigation_report.txt`.
+4. Choose 7 and type `3001`, then 8 to undo it.
+5. Choose 1 and type `logs/sample_malformed.txt` to see bad lines being skipped.
+6. Choose 0 to exit.
+
+## 6. Run the tests
+
+    make test               unit tests
+    bash tests/e2e.sh       end-to-end tests (needs bash; on Windows use Git Bash or WSL)
+
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| `g++` is not recognized | The compiler is not on your PATH. Redo step 1, then open a new terminal. |
+| `Could not open log file` | The terminal is in the wrong folder. Open the project folder itself and use a new terminal there. |
+| Red compile errors | Check that `include/` and `src/` are both present and that you ran the command from the project folder. |
