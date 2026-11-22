@@ -1,0 +1,71 @@
+# Running live monitoring
+
+Live monitoring watches one text file. Every line added to that file while CyberTrace is watching is checked at once, and you get an alert when an IP completes the sequence failed login, then successful login, then privileged access, then file transfer. It does not read your system's own logs; it reads lines in CyberTrace's format: `ID,timestamp,IP,type`.
+
+## 1. Build (once, in WSL or Linux)
+
+    sudo apt install build-essential
+    cd Cybertrace
+    make
+
+## 2. Run the demo with two terminals
+
+Keep the files in your WSL home folder (for example `~/Cybertrace`), not under `/mnt/c`.
+
+**Terminal 1: start the monitor**
+
+    cd ~/Cybertrace
+    : > live_test.txt            # creates an empty file to watch
+    ./cybertrace
+
+Type any name, then `9`, then `live_test.txt`, then `40` (seconds to watch). Start the feeder in Terminal 2 right away.
+
+**Terminal 2: feed the sequence**
+
+    cd ~/Cybertrace
+    bash examples/live_demo_feeder.sh live_test.txt 2
+
+The feeder adds six lines, one every 2 seconds: three failed logins, a login, privileged access and a file transfer. To type lines yourself instead:
+
+    echo "5001,2026-09-09T12:00:00,203.0.113.5,FailedLogin" >> live_test.txt
+
+## 3. What Terminal 1 shows
+
+    [CyberTrace] Live monitoring started on: live_test.txt
+    Watching for 40 seconds. Lines added to this file are analysed as they arrive.
+
+    [NEW EVENT] [855646] 2026-11-16T19:00:46 203.0.113.151 FailedLogin
+    ...
+    [NEW EVENT] [855651] 2026-11-16T19:00:51 203.0.113.151 FileTransfer
+      >> RISK ALERT for 203.0.113.151 (score: 27)
+         logged to alerts.log
+
+    [CyberTrace] Live monitoring ended: 6 new event(s), 0 skipped, 1 alert(s).
+
+The alert comes with the last event. The score is 1 + 1 + 1 + 2 + 5 + 7 = 17, plus 10 for the complete sequence. After the time ends, use option 11 to list the alerts, 6 for the report and 12 to save the investigation.
+
+## 4. Optional: send alerts to a command
+
+    export CYBERTRACE_NOTIFY_CMD="sh examples/notify_example.sh"
+    ./cybertrace
+
+After an alert the screen shows `notification: hook ok`, and `hook_alerts.txt` gets a line with the address and score. Replace the echo line in the script with your own mail or chat command.
+
+## 5. Rules and tips
+
+- Only lines added after you press Enter on the seconds prompt are read. Older lines are ignored.
+- Add lines with `>>` from a terminal. Editors that save by replacing the file (VS Code, Notepad) can make the monitor miss the new lines.
+- Each event ID can be used once per session; a repeated ID is skipped as a duplicate. The feeder uses new IDs on every run.
+- The menu does not respond while it watches. Choose enough seconds for your demo.
+- A line that is not in the format is skipped with a message and monitoring carries on.
+- Each IP alerts once, however many more events it produces.
+
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| Nothing appears | Start the feeder after you press Enter on the seconds prompt, and use the same file name in both terminals. |
+| `Could not open log file` | The file must exist. Create it with `: > live_test.txt` in the folder where you start the program. |
+| `[SKIPPED] duplicate event ID` | That ID was already used. Use new IDs or restart the program. |
+| `[SKIPPED] expected 4 fields` | The line is not in the format `ID,timestamp,IP,type`. |
+| Works on Linux but not in your setup | Move the files into the WSL home folder and add lines with `>>` from a WSL terminal. |
